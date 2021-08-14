@@ -1,15 +1,21 @@
 package uber;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class UberRide {
     int seated=0;
     int r=0;
     int d=0;
     int rs=0;
     int ds=0;
+    ReentrantLock lock = new ReentrantLock();
+    Condition condition  = lock.newCondition();
     int maxr=0;
     int maxd=0;
     public synchronized void request(String person) throws InterruptedException {
         if(person=="d"){
+            condition.await();
             d++;
         }else{
             r++;
