@@ -1,15 +1,10 @@
 package deferredcallback;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-
-import static java.sql.Timestamp.*;
 
 public class CallBackApi {
     PriorityQueue<CallBack>callBackPriorityQueue= new PriorityQueue<>((Comparator.comparing(o -> o.executeAt)));
