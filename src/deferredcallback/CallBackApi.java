@@ -3,11 +3,12 @@ package deferredcallback;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CallBackApi {
-    PriorityQueue<CallBack>callBackPriorityQueue= new PriorityQueue<>((Comparator.comparing(o -> o.executeAt)));
+    PriorityQueue<CallBack>callBackPriorityQueue= new PriorityQueue<>(Comparator.comparing(o -> o.executeAt));
     ReentrantLock lock = new ReentrantLock();
     Condition condition = lock.newCondition();
     Condition added = lock.newCondition();
@@ -39,14 +40,17 @@ public class CallBackApi {
                 condition.await();
             }
             while (callBackPriorityQueue.size()!=0){
-                CallBack callBack = callBackPriorityQueue.poll();
+                CallBack callBack = callBackPriorityQueue.peek();
                 long sleepFor = callBack.executeAt - System.currentTimeMillis();
                 if(sleepFor<=0){
                     break;
                 }
-                Thread.sleep(sleepFor);
-                System.out.println("msg: "+callBack.msg);
+
+                condition.await(sleepFor, TimeUnit.MILLISECONDS);
+
             }
+            CallBack callBack = callBackPriorityQueue.poll();
+            System.out.println("msg: "+callBack.msg);
             lock.unlock();
         }
 
