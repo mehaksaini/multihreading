@@ -31,7 +31,6 @@ public class UberRide {
         }else{
             lock.unlock();
             demoSema.acquire();
-
         }
 
 

@@ -10,7 +10,7 @@ public class Runner { public static void main(String[]args){
     Random random= new Random();
     List<Thread> all= new ArrayList<>();
 
-    for(int i=0;i<50;i++) {
+    for(int i=0;i<4;i++) {
         Thread thread= new Thread(()->{
             try {
                 Thread.sleep(random.nextInt(2000));
@@ -27,7 +27,7 @@ public class Runner { public static void main(String[]args){
         });
         all.add(thread);
     }
-    for(int i=0;i<50;i++) {
+    for(int i=0;i<4;i++) {
         Thread thread= new Thread(()->{
             try {
                 Thread.sleep(random.nextInt(4000));

@@ -32,7 +32,8 @@ public class DiningPhilosophers {
         maxDiners.acquire();
         forks[id%5].acquire();
         forks[(id+1)%5].acquire();
-        System.out.println("Philosopher " + id + " is eating");
+        int avaialbe = 4- maxDiners.availablePermits();
+        System.out.println("Philosophers " + avaialbe + " are eating");
         Thread.sleep(random.nextInt(5000));
         forks[id%5].release();
         forks[(id+1)%5].release();
