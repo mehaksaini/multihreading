@@ -19,9 +19,7 @@ public class Runner { public static void main(String[]args){
             }
             try {
                 uberRide.demoRequest();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (BrokenBarrierException e) {
+            } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
             }
         });
@@ -36,9 +34,7 @@ public class Runner { public static void main(String[]args){
             }
             try {
                 uberRide.republicRequest();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (BrokenBarrierException e) {
+            } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
             }
         });
